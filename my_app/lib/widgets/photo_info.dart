@@ -15,7 +15,7 @@ class _PhotoInfoState extends State<PhotoInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: const MyAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,8 +29,9 @@ class _PhotoInfoState extends State<PhotoInfo> {
                 fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(width: 16.0),
-            const Text("Some info about image"),
+            const Text("Some info about image",
+                style: TextStyle(fontSize: 20.0)),
+            const SizedBox(height: 20.0),
             const CustomElevatedButton(),
           ],
         ),

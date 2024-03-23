@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/widgets/app_bar.dart';
 import 'package:my_app/widgets/gallery.dart';
+import 'package:my_app/screens/home_page.dart';
+import 'package:my_app/screens/about_page.dart';
+import 'package:my_app/screens/contact_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -15,24 +18,9 @@ class _MyHomePageState extends State<MyHomePage>
       TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold);
   late TabController _controller;
   static const _pages = <Widget>[
-    Center(
-      child: Text(
-        'Home Page',
-        style: customTextStyle,
-      ),
-    ),
-    Center(
-      child: Text(
-        'About Page',
-        style: customTextStyle,
-      ),
-    ),
-    Center(
-      child: Text(
-        'Contact Page',
-        style: customTextStyle,
-      ),
-    ),
+    HomePageScreen(style: customTextStyle),
+    AboutPageScreen(style: customTextStyle),
+    ContactPageScreen(style: customTextStyle),
   ];
   @override
   void initState() {
@@ -69,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage>
             ListTile(
               title: const Text("Home"),
               selected: _selectedItem == 0,
+              selectedColor: Colors.deepOrange,
               onTap: () {
                 // Update the state of the app
                 _onItemTapped(0);
@@ -79,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage>
             ListTile(
               title: const Text("About"),
               selected: _selectedItem == 1,
+              selectedColor: Colors.deepOrange,
               onTap: () {
                 // Update the state of the app
                 _onItemTapped(1);
@@ -89,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage>
             ListTile(
               title: const Text("Contact"),
               selected: _selectedItem == 2,
+              selectedColor: Colors.deepOrange,
               onTap: () {
                 // Update the state of the app
                 _onItemTapped(2);

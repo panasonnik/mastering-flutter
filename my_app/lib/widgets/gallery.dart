@@ -35,10 +35,14 @@ class _ImagesPageState extends State<ImagesPage> {
                 Hero(
                   tag: 'img1',
                   child: GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PhotoInfo(imgUrl: img1Url, tag: 'img1')),
+                    onTap: () => Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        transitionDuration: const Duration(seconds: 1),
+                        reverseTransitionDuration: const Duration(seconds: 1),
+                        pageBuilder: (_, __, ___) =>
+                            PhotoInfo(imgUrl: img1Url, tag: 'img1'),
+                      ),
                     ),
                     child: Image(
                       image: NetworkImage(img1Url),
@@ -48,14 +52,17 @@ class _ImagesPageState extends State<ImagesPage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 16.0),
+                const SizedBox(width: 16.0),
                 Hero(
                   tag: 'img2',
                   child: GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PhotoInfo(imgUrl: img2Url, tag: 'img2')),
+                    onTap: () => Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        transitionDuration: const Duration(seconds: 2),
+                        pageBuilder: (_, __, ___) =>
+                            PhotoInfo(imgUrl: img2Url, tag: 'img2'),
+                      ),
                     ),
                     child: Image(
                       image: NetworkImage(img2Url),
@@ -67,22 +74,29 @@ class _ImagesPageState extends State<ImagesPage> {
                 )
               ],
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateColor.resolveWith((states) {
-                  if (states.contains(MaterialState.pressed)) {
-                    return Colors.deepOrangeAccent; // Color when pressed
-                  }
-                  return Colors.deepOrange; // Default color
-                }),
-                alignment: Alignment.center,
+            Ink(
+              decoration: ShapeDecoration(
+                color: Colors.deepOrange, // Ink color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      8.0), // Adjust border radius as needed
+                ),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text(
-                'Back',
-                style: TextStyle(color: Colors.white),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Ink(
+                  height: 48.0, // Adjust height as needed
+                  width: MediaQuery.of(context).size.width *
+                      0.8, // Adjust width as needed
+                  child: const Center(
+                    child: Text(
+                      'Back',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

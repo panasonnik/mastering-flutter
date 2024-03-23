@@ -7,22 +7,28 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateColor.resolveWith((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return Colors.deepOrangeAccent; // Color when pressed
-          }
-          return Colors.deepOrange; // Default color
-        }),
-        alignment: Alignment.center,
+    return Ink(
+      decoration: ShapeDecoration(
+        color: Colors.deepOrange,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
       ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      child: const Text(
-        'Back',
-        style: TextStyle(color: Colors.white),
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: SizedBox(
+          height: 48.0, // Adjust height as needed
+          width:
+              MediaQuery.of(context).size.width * 0.8, // Adjust width as needed
+          child: const Center(
+            child: Text(
+              'Back',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
       ),
     );
   }
