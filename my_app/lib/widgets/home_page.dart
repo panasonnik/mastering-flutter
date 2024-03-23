@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage>
         child: TabBarView(
           controller: _controller,
           children: const [
-            ..._pages, //?
+            ..._pages, //spread operator, дозволяє додавати всі елементи з _pages до списку дочірніх елементів TabBarView, щоб кожен елемент _pages став окремою вкладкою у TabBarView.
           ],
         ),
       ),

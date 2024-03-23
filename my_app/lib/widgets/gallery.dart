@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'app_bar.dart';
 import 'package:my_app/widgets/photo_info.dart';
 
@@ -59,7 +58,8 @@ class _ImagesPageState extends State<ImagesPage> {
                     onTap: () => Navigator.push(
                       context,
                       PageRouteBuilder(
-                        transitionDuration: const Duration(seconds: 2),
+                        transitionDuration: const Duration(seconds: 1),
+                        reverseTransitionDuration: const Duration(seconds: 1),
                         pageBuilder: (_, __, ___) =>
                             PhotoInfo(imgUrl: img2Url, tag: 'img2'),
                       ),
