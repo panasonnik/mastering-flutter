@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/widgets/photo_info.dart';
 
 class ImagesPage extends StatefulWidget {
-  const ImagesPage({super.key});
+  final Function addItemFunction;
+  const ImagesPage({super.key, required this.addItemFunction});
 
   @override
   State<ImagesPage> createState() => _ImagesPageState();
@@ -28,9 +29,17 @@ class _ImagesPageState extends State<ImagesPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Item(imgUrl: img1Url, tag: 'item1'),
+              Item(
+                imgUrl: img1Url,
+                tag: 'item1',
+                addItemFunction: widget.addItemFunction,
+              ),
               const SizedBox(width: 16.0),
-              Item(imgUrl: img2Url, tag: 'item2'),
+              Item(
+                imgUrl: img2Url,
+                tag: 'item2',
+                addItemFunction: widget.addItemFunction,
+              ),
             ],
           ),
           // Container(
@@ -70,10 +79,12 @@ class _ImagesPageState extends State<ImagesPage> {
 }
 
 class Item extends StatelessWidget {
+  final Function addItemFunction;
   const Item({
     super.key,
     required this.imgUrl,
     required this.tag,
+    required this.addItemFunction,
   });
 
   final String imgUrl;
@@ -114,7 +125,7 @@ class Item extends StatelessWidget {
           ),
           child: InkWell(
             onTap: () {
-              debugPrint("Click");
+              addItemFunction();
             },
             child: Ink(
               padding: const EdgeInsets.symmetric(

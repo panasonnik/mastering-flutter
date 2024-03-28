@@ -13,16 +13,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   int _selectedItem = 0;
+  int _totalItems = 0;
+  addItem() {
+    setState(() {
+      _totalItems++;
+    });
+  }
+
   static const TextStyle customTextStyle =
       TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold);
   late TabController _controller;
-  static const _pages = <Widget>[
-    HomePageScreen(style: customTextStyle),
-    ImagesPage(),
-    ContactPageScreen(style: customTextStyle),
-  ];
+  late List<Widget> _pages;
   @override
   void initState() {
+    _pages = [
+      const HomePageScreen(style: customTextStyle),
+      ImagesPage(addItemFunction: addItem),
+      const ContactPageScreen(style: customTextStyle),
+    ];
     super.initState();
     _controller = TabController(vsync: this, length: _pages.length);
 
@@ -31,6 +39,12 @@ class _MyHomePageState extends State<MyHomePage>
         _selectedItem = _controller.index;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   void _onItemTapped(int index) {
@@ -97,14 +111,19 @@ class _MyHomePageState extends State<MyHomePage>
         //   );
         // },
         backgroundColor: Colors.deepOrange,
-        child: const Icon(Icons.shopping_cart),
+        child: Row(
+          children: [
+            const Icon(Icons.shopping_cart),
+            Text("$_totalItems"),
+          ],
+        ),
       ),
       body: Container(
         alignment: Alignment.center,
         child: TabBarView(
           controller: _controller,
-          children: const [
-            ..._pages, //spread operator, дозволяє додавати всі елементи з _pages до списку дочірніх елементів TabBarView, щоб кожен елемент _pages став окремою вкладкою у TabBarView.
+          children: [
+            ..._pages,
           ],
         ),
       ),
