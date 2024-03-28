@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/widgets/app_bar.dart';
-import 'package:my_app/widgets/gallery.dart';
+import 'package:my_app/screens/gallery.dart';
 import 'package:my_app/screens/home_page.dart';
-import 'package:my_app/screens/about_page.dart';
 import 'package:my_app/screens/contact_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage>
   late TabController _controller;
   static const _pages = <Widget>[
     HomePageScreen(style: customTextStyle),
-    AboutPageScreen(style: customTextStyle),
+    ImagesPage(),
     ContactPageScreen(style: customTextStyle),
   ];
   @override
@@ -66,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage>
               },
             ),
             ListTile(
-              title: const Text("About"),
+              title: const Text("Shop"),
               selected: _selectedItem == 1,
               selectedColor: Colors.deepOrange,
               onTap: () {
@@ -90,14 +89,15 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ImagesPage()),
-          );
-        },
+        onPressed: () {},
+        // onPressed:() {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(builder: (context) => const ImagesPage()),
+        //   );
+        // },
         backgroundColor: Colors.deepOrange,
-        child: const Icon(Icons.photo),
+        child: const Icon(Icons.shopping_cart),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -115,8 +115,8 @@ class _MyHomePageState extends State<MyHomePage>
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: "About",
+            icon: Icon(Icons.shopping_bag),
+            label: "Shop",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),

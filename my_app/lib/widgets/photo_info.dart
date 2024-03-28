@@ -3,8 +3,7 @@ import 'app_bar.dart';
 import 'back_button.dart';
 
 class PhotoInfo extends StatefulWidget {
-  const PhotoInfo({Key? key, required this.imgUrl, required this.tag})
-      : super(key: key);
+  const PhotoInfo({super.key, required this.imgUrl, required this.tag});
   final String imgUrl;
   final String tag;
   @override
