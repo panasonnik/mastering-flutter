@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/widgets/photo_info.dart';
+import 'package:my_app/widgets/item.dart';
 
 class ImagesPage extends StatefulWidget {
   final Function addItemFunction;
-  const ImagesPage({super.key, required this.addItemFunction});
+  final Function saveItemFunction;
+  const ImagesPage({
+    super.key,
+    required this.addItemFunction,
+    required this.saveItemFunction,
+  });
 
   @override
   State<ImagesPage> createState() => _ImagesPageState();
@@ -33,12 +38,16 @@ class _ImagesPageState extends State<ImagesPage> {
                 imgUrl: img1Url,
                 tag: 'item1',
                 addItemFunction: widget.addItemFunction,
+                title: "Item2",
+                saveItemFunction: widget.saveItemFunction,
               ),
               const SizedBox(width: 16.0),
               Item(
                 imgUrl: img2Url,
                 tag: 'item2',
                 addItemFunction: widget.addItemFunction,
+                title: "Item1",
+                saveItemFunction: widget.saveItemFunction,
               ),
             ],
           ),
@@ -74,82 +83,6 @@ class _ImagesPageState extends State<ImagesPage> {
           // ),
         ],
       ),
-    );
-  }
-}
-
-class Item extends StatelessWidget {
-  final Function addItemFunction;
-  const Item({
-    super.key,
-    required this.imgUrl,
-    required this.tag,
-    required this.addItemFunction,
-  });
-
-  final String imgUrl;
-  final String tag;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Hero(
-          tag: tag,
-          child: GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              PageRouteBuilder(
-                transitionDuration: const Duration(seconds: 1),
-                reverseTransitionDuration: const Duration(seconds: 1),
-                pageBuilder: (_, __, ___) =>
-                    PhotoInfo(imgUrl: imgUrl, tag: tag),
-              ),
-            ),
-            child: Image(
-              image: NetworkImage(imgUrl),
-              height: 180.0,
-              width: 180.0,
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10.0,
-        ),
-        Ink(
-          decoration: const BoxDecoration(
-            color: Colors.deepOrange,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
-          ),
-          child: InkWell(
-            onTap: () {
-              addItemFunction();
-            },
-            child: Ink(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 8.0, horizontal: 24.0), // Adjust width as needed
-              child: const Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.shopping_cart_outlined,
-                      color: Colors.white,
-                    ),
-                    SizedBox(width: 8.0),
-                    Text(
-                      'Add',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

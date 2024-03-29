@@ -3,6 +3,7 @@ import 'package:my_app/widgets/app_bar.dart';
 import 'package:my_app/screens/gallery.dart';
 import 'package:my_app/screens/home_page.dart';
 import 'package:my_app/screens/contact_page.dart';
+import 'package:my_app/screens/cart_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -14,9 +15,19 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   int _selectedItem = 0;
   int _totalItems = 0;
+  int key = 1;
+  late Map<int, String> items;
+
   addItem() {
     setState(() {
       _totalItems++;
+    });
+  }
+
+  saveItem(title) {
+    setState(() {
+      items.putIfAbsent(key, () => title);
+      key++;
     });
   }
 
@@ -28,7 +39,10 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     _pages = [
       const HomePageScreen(style: customTextStyle),
-      ImagesPage(addItemFunction: addItem),
+      ImagesPage(
+        addItemFunction: addItem,
+        saveItemFunction: saveItem,
+      ),
       const ContactPageScreen(style: customTextStyle),
     ];
     super.initState();
@@ -103,18 +117,37 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        // onPressed:() {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => const ImagesPage()),
-        //   );
-        // },
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    CartPage(style: customTextStyle, items: items)),
+          );
+        },
         backgroundColor: Colors.deepOrange,
-        child: Row(
+        child: Stack(
           children: [
             const Icon(Icons.shopping_cart),
-            Text("$_totalItems"),
+            const Positioned(
+              top: 10.5,
+              left: 10.5,
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 7.0,
+              ),
+            ),
+            Positioned(
+              top: 9,
+              left: 14,
+              child: Text(
+                "$_totalItems",
+                style: const TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 12.0,
+                ),
+              ),
+            ),
           ],
         ),
       ),

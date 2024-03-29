@@ -5,7 +5,6 @@ class ContactPageScreen extends StatelessWidget {
     super.key,
     required this.style,
   });
-
   final TextStyle style;
 
   @override
