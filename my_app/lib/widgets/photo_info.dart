@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_bar.dart';
 import 'back_button.dart';
-import 'package:my_app/widgets/photo_info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 

@@ -18,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage>
   int key = 1;
   late final Map<int, Map<String, dynamic>> items = {};
 
-  addItem() {
+  void addItem() {
     setState(() {
       _totalItems++;
     });
@@ -33,7 +33,6 @@ class _MyHomePageState extends State<MyHomePage>
       if (existingItem.key != -1) {
         items[existingItem.key]!['count']++;
       } else {
-        // If the title doesn't exist, add a new entry with count initialized to 1
         items[key] = {'title': title, 'count': 1};
         key++;
       }
@@ -93,31 +92,26 @@ class _MyHomePageState extends State<MyHomePage>
             ListTile(
               title: const Text("Home"),
               selected: _selectedItem == 0,
-              selectedColor: Colors.deepOrange,
+              selectedTileColor: Colors.deepOrange,
               onTap: () {
-                // Update the state of the app
                 _onItemTapped(0);
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: const Text("Shop"),
               selected: _selectedItem == 1,
-              selectedColor: Colors.deepOrange,
+              selectedTileColor: Colors.deepOrange,
               onTap: () {
-                // Update the state of the app
                 _onItemTapped(1);
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: const Text("Contact"),
               selected: _selectedItem == 2,
-              selectedColor: Colors.deepOrange,
+              selectedTileColor: Colors.deepOrange,
               onTap: () {
-                // Update the state of the app
                 _onItemTapped(2);
                 Navigator.pop(context);
               },
@@ -125,30 +119,31 @@ class _MyHomePageState extends State<MyHomePage>
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    CartPage(style: customTextStyle, items: items)),
-          );
-        },
-        backgroundColor: Colors.deepOrange,
-        child: Stack(
-          children: [
-            const Icon(Icons.shopping_cart),
-            const Positioned(
-              top: 10.5,
-              left: 10.5,
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 7.0,
+      floatingActionButton: Stack(
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      CartPage(style: customTextStyle, items: items),
+                ),
+              );
+            },
+            backgroundColor: Colors.deepOrange,
+            child: const Icon(Icons.shopping_cart),
+          ),
+          Positioned(
+            top: 32,
+            left: 34,
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
               ),
-            ),
-            Positioned(
-              top: 9,
-              left: 14,
               child: Text(
                 "$_totalItems",
                 style: const TextStyle(
@@ -157,8 +152,8 @@ class _MyHomePageState extends State<MyHomePage>
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       body: Container(
         alignment: Alignment.center,
