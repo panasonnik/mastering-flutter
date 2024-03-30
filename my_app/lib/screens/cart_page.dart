@@ -9,7 +9,7 @@ class CartPage extends StatelessWidget {
   });
 
   final TextStyle style;
-  final Map<int, String> items;
+  final Map<int, Map<String, dynamic>> items;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class CartPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              '${entry.value}',
+                              '${entry.value['title']}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w600,
@@ -70,7 +70,7 @@ class CartPage extends StatelessWidget {
                             ),
                             SizedBox(width: 50.0),
                             Text(
-                              '${entry.key}',
+                              '${entry.value['count']}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w600,

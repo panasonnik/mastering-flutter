@@ -16,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage>
   int _selectedItem = 0;
   int _totalItems = 0;
   int key = 1;
-  late Map<int, String> items;
+  late final Map<int, Map<String, dynamic>> items = {};
 
   addItem() {
     setState(() {
@@ -24,10 +24,19 @@ class _MyHomePageState extends State<MyHomePage>
     });
   }
 
-  saveItem(title) {
+  void saveItem(String title) {
     setState(() {
-      items.putIfAbsent(key, () => title);
-      key++;
+      final existingItem = items.entries.firstWhere(
+        (entry) => entry.value['title'] == title,
+        orElse: () => const MapEntry(-1, {}),
+      );
+      if (existingItem.key != -1) {
+        items[existingItem.key]!['count']++;
+      } else {
+        // If the title doesn't exist, add a new entry with count initialized to 1
+        items[key] = {'title': title, 'count': 1};
+        key++;
+      }
     });
   }
 
@@ -144,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage>
                 "$_totalItems",
                 style: const TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 12.0,
+                  fontSize: 10.0,
                 ),
               ),
             ),

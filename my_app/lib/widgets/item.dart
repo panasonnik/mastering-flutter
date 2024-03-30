@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/widgets/photo_info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Item extends StatelessWidget {
   const Item({
@@ -28,32 +29,29 @@ class Item extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               PageRouteBuilder(
-                transitionDuration: const Duration(seconds: 1),
-                reverseTransitionDuration: const Duration(seconds: 1),
                 pageBuilder: (_, __, ___) =>
                     PhotoInfo(imgUrl: imgUrl, tag: tag),
               ),
             ),
-            child: CachedNetworkImage(
-              imageUrl: imgUrl,
-              placeholder: (context, url) => const SizedBox(
-                height: 10.0,
-                width: 10.0,
-                child: CircularProgressIndicator(
-                  color: Colors.deepOrange,
+            child: Stack(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  height: 180.0,
+                  width: 180.0,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.black12,
+                    highlightColor: Colors.deepOrange.shade100,
+                    child: Container(
+                      width: 180.0,
+                      height: 180.0,
+                      color: Colors.black12,
+                    ),
+                  ),
                 ),
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              height: 180.0,
-              width: 180.0,
-              fit: BoxFit.contain,
+              ],
             ),
-            // Image(
-            //   image: CachedNetworkImageProvider(imgUrl),
-            //   height: 180.0,
-            //   width: 180.0,
-            //   fit: BoxFit.contain,
-            // ),
           ),
         ),
         const SizedBox(
@@ -61,10 +59,10 @@ class Item extends StatelessWidget {
         ),
         Text(title),
         Ink(
-          decoration: const BoxDecoration(
-            color: Colors.deepOrange,
+          decoration: BoxDecoration(
+            color: Colors.deepOrange.shade400,
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
           ),
           child: InkWell(
             onTap: () {

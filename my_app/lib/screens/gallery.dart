@@ -21,68 +21,88 @@ class _ImagesPageState extends State<ImagesPage> {
       'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
   String img2Url =
       'https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
+  String img3Url =
+      'https://plus.unsplash.com/premium_photo-1666433656515-77386ea16d5a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+  String img4Url =
+      'https://images.unsplash.com/photo-1711348260213-b4f6c9c1d6be?q=80&w=1886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
         children: [
-          const Text(
-            "Images",
-            style: customTextStyle,
-          ),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Item(
-                imgUrl: img1Url,
-                tag: 'item1',
-                addItemFunction: widget.addItemFunction,
-                title: "Item2",
-                saveItemFunction: widget.saveItemFunction,
+              const SizedBox(
+                height: 30.0,
               ),
-              const SizedBox(width: 16.0),
-              Item(
-                imgUrl: img2Url,
-                tag: 'item2',
-                addItemFunction: widget.addItemFunction,
-                title: "Item1",
-                saveItemFunction: widget.saveItemFunction,
+              const Text(
+                "Images",
+                style: customTextStyle,
               ),
+              const SizedBox(
+                height: 30.0,
+              ),
+              RowOfTwoItems(
+                  img1Url: img1Url,
+                  widget: widget,
+                  img2Url: img2Url,
+                  tag1: "Item 1",
+                  tag2: "Item 2"),
+              const SizedBox(height: 30.0),
+              RowOfTwoItems(
+                  img1Url: img3Url,
+                  widget: widget,
+                  img2Url: img4Url,
+                  tag1: "Item 3",
+                  tag2: "Item 4"),
             ],
           ),
-          // Container(
-          //   margin: const EdgeInsets.only(top: 200.0),
-          //   alignment: Alignment.bottomCenter,
-          //   child: Ink(
-          //     decoration: BoxDecoration(
-          //       border: Border.all(color: Colors.deepOrange, width: 3.0),
-          //       color: Colors.transparent,
-          //       shape: BoxShape.rectangle,
-          //       borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-          //     ),
-          //     child: InkWell(
-          //       onTap: () {
-          //         Navigator.pop(context);
-          //       },
-          //       child: Ink(
-          //         height: 48.0, // Adjust height as needed
-          //         width: MediaQuery.of(context).size.width *
-          //             0.8, // Adjust width as needed
-          //         child: const Center(
-          //           child: Text(
-          //             'Back',
-          //             style: TextStyle(
-          //                 color: Colors.deepOrange,
-          //                 fontWeight: FontWeight.bold),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
+    );
+  }
+}
+
+class RowOfTwoItems extends StatelessWidget {
+  const RowOfTwoItems({
+    super.key,
+    required this.img1Url,
+    required this.widget,
+    required this.img2Url,
+    required this.tag1,
+    required this.tag2,
+  });
+
+  final String img1Url;
+  final ImagesPage widget;
+  final String img2Url;
+  final String tag1;
+  final String tag2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Item(
+          imgUrl: img1Url,
+          tag: tag1,
+          addItemFunction: widget.addItemFunction,
+          title: tag1,
+          saveItemFunction: widget.saveItemFunction,
+        ),
+        const SizedBox(width: 16.0),
+        Item(
+          imgUrl: img2Url,
+          tag: tag2,
+          addItemFunction: widget.addItemFunction,
+          title: tag2,
+          saveItemFunction: widget.saveItemFunction,
+        ),
+      ],
     );
   }
 }

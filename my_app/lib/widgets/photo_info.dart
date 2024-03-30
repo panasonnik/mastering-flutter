@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'app_bar.dart';
 import 'back_button.dart';
+import 'package:my_app/widgets/photo_info.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
-class PhotoInfo extends StatefulWidget {
+class PhotoInfo extends StatelessWidget {
   const PhotoInfo({super.key, required this.imgUrl, required this.tag});
   final String imgUrl;
   final String tag;
-  @override
-  State<PhotoInfo> createState() => _PhotoInfoState();
-}
-
-class _PhotoInfoState extends State<PhotoInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +18,21 @@ class _PhotoInfoState extends State<PhotoInfo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Hero(
-              tag: widget.tag,
-              child: Image(
-                image: NetworkImage(widget.imgUrl),
-                height: 400.0,
-                width: MediaQuery.of(context).size.width * 0.8,
-                fit: BoxFit.contain,
+              tag: tag,
+              child: CachedNetworkImage(
+                imageUrl: imgUrl,
+                height: 180.0,
+                width: 180.0,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Shimmer.fromColors(
+                  baseColor: Colors.black12,
+                  highlightColor: Colors.deepOrange.shade100,
+                  child: Container(
+                    width: 180.0,
+                    height: 180.0,
+                    color: Colors.black12,
+                  ),
+                ),
               ),
             ),
             const Text("Some info about image",
