@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/widgets/row_of_two_items.dart';
 
-class ImagesPage extends StatefulWidget {
+class ItemsPage extends StatefulWidget {
   final Function addItemFunction;
   final Function saveItemFunction;
-  const ImagesPage({
+  const ItemsPage({
     super.key,
     required this.addItemFunction,
     required this.saveItemFunction,
   });
 
   @override
-  State<ImagesPage> createState() => _ImagesPageState();
+  State<ItemsPage> createState() => _ItemsPageState();
 }
 
-class _ImagesPageState extends State<ImagesPage> {
+class _ItemsPageState extends State<ItemsPage> {
   static const TextStyle customTextStyle =
       TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold);
   String img1Url =
@@ -39,7 +39,7 @@ class _ImagesPageState extends State<ImagesPage> {
                 height: 30.0,
               ),
               const Text(
-                "Images",
+                "Items",
                 style: customTextStyle,
               ),
               const SizedBox(

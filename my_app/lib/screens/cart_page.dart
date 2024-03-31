@@ -22,16 +22,16 @@ class CartPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Shopping cart',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Expanded(
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    ListTile(
+                    const ListTile(
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -55,32 +55,34 @@ class CartPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    ...items.entries.map((entry) {
-                      return ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '${entry.value['title']}',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black54,
+                    ...items.entries.map(
+                      (entry) {
+                        return ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                '${entry.value['title']}',
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black54,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 50.0),
-                            Text(
-                              '${entry.value['count']}',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black45,
+                              const SizedBox(width: 50.0),
+                              Text(
+                                '${entry.value['count']}',
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black45,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

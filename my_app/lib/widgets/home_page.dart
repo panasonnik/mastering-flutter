@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/widgets/app_bar.dart';
-import 'package:my_app/screens/gallery.dart';
+import 'package:my_app/screens/shop.dart';
 import 'package:my_app/screens/home_page.dart';
 import 'package:my_app/screens/contact_page.dart';
 import 'package:my_app/screens/cart_page.dart';
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     _pages = [
       const HomePageScreen(style: customTextStyle),
-      ImagesPage(
+      ItemsPage(
         addItemFunction: addItem,
         saveItemFunction: saveItem,
       ),

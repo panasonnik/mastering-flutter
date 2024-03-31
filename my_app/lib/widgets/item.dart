@@ -42,7 +42,7 @@ class Item extends StatelessWidget {
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Shimmer.fromColors(
                     baseColor: Colors.black12,
-                    highlightColor: Colors.deepOrange.shade100,
+                    highlightColor: Colors.deepOrange.shade200,
                     child: Container(
                       width: 180.0,
                       height: 180.0,
@@ -70,8 +70,8 @@ class Item extends StatelessWidget {
               saveItemFunction(title);
             },
             child: Ink(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 8.0, horizontal: 24.0), // Adjust width as needed
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
               child: const Center(
                 child: Row(
                   children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/gallery.dart';
+import 'package:my_app/screens/shop.dart';
 import 'package:my_app/widgets/item.dart';
 
 class RowOfTwoItems extends StatelessWidget {
@@ -13,7 +13,7 @@ class RowOfTwoItems extends StatelessWidget {
   });
 
   final String img1Url;
-  final ImagesPage widget;
+  final ItemsPage widget;
   final String img2Url;
   final String tag1;
   final String tag2;
